@@ -14,7 +14,7 @@
  
   Authors in chronological order of contribution:
   Author 1: Timothy E. Riedel
-  Author 2: ?????????
+  Author 2: Brianna Garcia
   
   References:
   http://docs.webplatform.org/wiki/concepts/programming/drawing_images_onto_canvas#Loading_the_image_programmatically
@@ -24,10 +24,10 @@
   http://stackoverflow.com/questions/11929099/html5-canvas-drawimage-ratio-bug-ios
   
   Brief Description of Goal of Code:
-  blah, blah, blah,
+  Create an app that lets users from any device and shows it on canvas. the app will analize the image to detect the color blue onto another canvas.
  
   Known Issues:
-  blah, blah, blah, blah
+  No known issues. 
 -->
 
  <head>
@@ -102,23 +102,39 @@
 
           /* PUT ANY CHANGES TO THE JAVASCRIPT HERE  */
           
+        var imageData = context.ImageData(0, 0, img.width, img.height);
+       // this is a variable that will store the image shape and size starting from 0,0 which is image height and width  
           
           
-          
-        } // end of img.onload
+        var imageData = imageData.data;
+      // this variable will take the data from the last variable and change it be the color blue 
+        
+        for(var i = 0; i < imgData.length; i+=4) {
+           imgData[i] = 0; //Red intensity channel data
+           imgData[i+1] = 0; //Green intensity channel data 
+        }
+
+      // This meana that it will go by four to access every single pixel and it's intensity in the color red and the color green.
+        
+        
+        
+     // This code will the image that has been changed into the second canvas 
+     context2.putImageData(imageData, 0, 0);   
+        
+        } // This is the end of the img.onload
         
         img.src = reader.result;
-      } //  end of reader.onload
+      } //  This is the end of reader.onload
       
       reader.readAsDataURL(file);
-    } // end of the if statement checking that file is an image
+    } // This is the end of the if chain that will check if it is an image
     else
     {
-      // this is what happens if the orignial file selected is not an image file
+      // If it is not an image supported then this is what happens
       messageDisplayArea.innerHTML = "File not supported!"
-    } // end of the else statement if file in NOT an image
-  }); // end of the fileInput.addEventListener function
- } // end of the window.onload function
+    } // This is the end of the statement for an image not supported
+  }); // This is the end of the fileInput.addEventListener function
+ } // This is the end of the window.onload function
  </script>
  </head>
 
@@ -133,16 +149,30 @@
         <input type="file" id="fileInput" STYLE="background-color: #FF6600;">
       </div>
       <div id="messageDisplayArea"></div>
-      
+      <!-- This will paste the uploaded image -->
       <canvas id="myCanvas" width=600 height=500 style="border:1px solid #d3d3d3;"></canvas>
-      <script> /* This script initiates the cavas and puts the text on the canvas "myCanvas" */
+      <script> /* This script will put the text on the canvas "myCanvas" */
         var canvas = document.getElementById('myCanvas');
         var context = canvas.getContext("2d");
-        context.font = '20pt Calibri';
+        context.font = '20pt Arial';
         context.fillStyle = "black";
         context.fillText("Original image will go here", 10, 20);
       </script>
 
+        <!-- This is the second canvas code that will paste onto the blue image -->
+     <canvas id="myCanvas2" width=600 height=500 style="border:1px solid #d3d3d3;"></canvas>
+          </script>
+     var canvas2 = document.getElementId('myCanvas2');
+     var context2 = canvas2.getContext("2d");
+     context2.font = '20pt Arial';
+     context2.fillStyle = "black";
+     context2.fillText("The Blue rendered image will go here!", 10, 20);
+       </script>
+         <!--  This script is from canvas one  -->
+
+     
+
+  
     </div><!-- /content -->
     <div data-role="footer" data-position="fixed">
       <p>DIY Diagnostics</p>
